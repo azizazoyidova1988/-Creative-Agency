@@ -15,13 +15,30 @@ def get_categories():
         categories = dict_fetchall(cursor)
         return categories
 
+def get_category_by_id(category_id):
+    with closing(connection.cursor()) as cursor:
+        cursor.execute(""" select product.*,category.name as cat_name from product inner join category on 
+        product.category_id= %s""", [category_id])
+        categor = dict_fetchone(cursor)
+        return categor
 
 def get_teams():
     with closing(connection.cursor()) as cursor:
         cursor.execute("""select * from team""")
         teams = dict_fetchall(cursor)
         return teams
+def get_products():
+    with closing(connection.cursor()) as cursor:
+        cursor.execute("""select product.*,category.name as cat_name from product inner join category on 
+        product.category_id=category.id""")
+        products = dict_fetchall(cursor)
+        return products
 
+def get_clients():
+    with closing(connection.cursor()) as cursor:
+        cursor.execute("""select * from client""")
+        clients = dict_fetchall(cursor)
+        return clients
 
 def get_testimonials():
     with closing(connection.cursor()) as cursor:

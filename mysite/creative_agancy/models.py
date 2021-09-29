@@ -28,9 +28,6 @@ class Team(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)
-    image = models.ImageField(upload_to='images/', blank=False, null=False)
-    project_name = models.CharField(max_length=50, blank=False, null=False)
-    description = models.CharField(max_length=450, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -38,6 +35,18 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Product(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    project_name = models.CharField(max_length=50, blank=True, null=True)
+    description = models.CharField(max_length=450, blank=True, null=True)
+    category=models.ForeignKey(Category,blank=True,null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "product"
+    def __str__(self):
+        return self.name
 
 class Pricing(models.Model):
     price_type = models.CharField(max_length=40, blank=False, null=False)
@@ -72,5 +81,15 @@ class Contact(models.Model):
 
     class Meta:
         db_table = "contact"
+    def __str__(self):
+        return self.name
+
+class Clients(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "client"
     def __str__(self):
         return self.name
