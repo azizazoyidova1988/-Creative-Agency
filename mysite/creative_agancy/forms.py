@@ -32,6 +32,12 @@ class TestimonialForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product()
+        fields = '__all__'
+
+
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact()
